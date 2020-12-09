@@ -25,6 +25,6 @@ jobs:
 
 
       run: |
-        gradle :WmTemplateProviderExt:assembleArtifact
-        gradle :WmTemplateProvider:assembleArtifact
+        gradle :DemoPetStoreProviderExt:assembleArtifact
+        gradle :DemoPetStoreProvider:assembleArtifact
         gradle publish

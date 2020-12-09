@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rest-connector xmlns="http://www.softwareag.com/cloudstreams/metadata/handler/model" id="com.softwareag.cloudstreams.petstore_v2" version="1.0" group="Petstore" name="Petstore" displayName="Petstore">
+    <connections>
+        <connection type="sagcloud" name="Petstoreconnection" displayName="Petstoreconnection">
+            <groups>
+                <group type="connection" name="connection" displayName="Connection">
+                    <description>Define the required connection configurations to initiate communication with the SaaS provider.</description>
+                    <fields>
+                        <field isRequired="false" isEncrypted="false" isHidden="false" isArray="false" defaultValue="https://petstore.swagger.io/v2" name="cn.providerUrl" displayName="Server URL">
+                            <description>The native provider endpoint target for the connection configuration</description>
+                        </field>
+                    </fields>
+                </group>
+                <group type="credentials" name="credentials" displayName="Credentials">
+                    <description>Define configurations needed for the username and password based authentication to the SaaS provider.</description>
+                    <fields/>
+                </group>
+            </groups>
+        </connection>
+    </connections>
+    <services>
+        <service xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="RESTServiceType" endpoint="${cn.providerUrl}" name="petstoreservice" displayName="petstoreservice">
+            <documentModel packageName="." nsName="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes" useInlineModel="true"/>
+            <resources>
+                <mappings/>
+                <resource method="POST" path="/user/createWithArray" type="SIMPLE" name="createUsersWithArrayInput" displayName="Creates list of users with given input array">
+                    <mappings>
+                        <map context="IN" name="createUsersWithArrayInputMappingIN0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="createUsersWithArrayInputMappingOUT0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="createUsersWithArrayInputMappingOUT1">
+                            <source type="LITERAL">application/xml</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                    </mappings>
+                    <parameters/>
+                    <request name="body" messageFormatterType="application/json" builderType="application/octet+idataoref" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:User" dimension="1"/>
+                    <responses>
+                        <response name="postdefaultcreateUsersWithArrayInputResponse" code="100-599" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                    </responses>
+                </resource>
+                <resource method="POST" path="/pet/{petId}/uploadImage" type="SIMPLE" name="uploadFile" displayName="uploads an image">
+                    <mappings>
+                        <map context="IN" name="uploadFileMappingIN0">
+                            <source type="LITERAL">multipart/form-data</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="uploadFileMappingOUT0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                    </mappings>
+                    <parameters>
+                        <parameter name="petId" isRequired="true" style="URI_CONTEXT" dataType="String"/>
+                    </parameters>
+                    <request name="stream" messageFormatterType="vnd.sag.cloudstreams+binary" builderType="vnd.sag.cloudstreams+binary" dimension="0"/>
+                    <responses>
+                        <response name="post200uploadFileResponse" code="200" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:ApiResponse" excludeRoot="true" dimension="0"/>
+                    </responses>
+                </resource>
+                <resource method="GET" path="/pet/findByTags" type="SIMPLE" isHidden="true" name="findPetsByTags" displayName="Finds Pets by tags">
+                    <description>Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.</description>
+                    <mappings>
+                        <map context="OUT" name="findPetsByTagsMappingOUT0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="findPetsByTagsMappingOUT1">
+                            <source type="LITERAL">application/xml</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                    </mappings>
+                    <parameters>
+                        <parameter name="tags" isRequired="true" style="QUERYSTRING_PARAM" dataType="String"/>
+                    </parameters>
+                    <responses>
+                        <response name="get200findPetsByTagsResponse" code="200" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:Pet" excludeRoot="true" dimension="1"/>
+                        <response name="get400findPetsByTagsResponse" code="400" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                    </responses>
+                </resource>
+                <resource method="POST" path="/store/order" type="SIMPLE" name="placeOrder" displayName="Place an order for a pet">
+                    <mappings>
+                        <map context="IN" name="placeOrderMappingIN0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="placeOrderMappingOUT0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="placeOrderMappingOUT1">
+                            <source type="LITERAL">application/xml</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                    </mappings>
+                    <parameters/>
+                    <request name="body" messageFormatterType="application/json" builderType="application/octet+idataoref" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:Order" dimension="0"/>
+                    <responses>
+                        <response name="post200placeOrderResponse" code="200" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:Order" excludeRoot="true" dimension="0"/>
+                        <response name="post400placeOrderResponse" code="400" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                    </responses>
+                </resource>
+                <resource method="GET" path="/store/order/{orderId}" type="SIMPLE" name="getOrderById" displayName="Find purchase order by ID">
+                    <description>For valid response try integer IDs with value &gt;= 1 and &lt;= 10. Other values will generated exceptions</description>
+                    <mappings>
+                        <map context="OUT" name="getOrderByIdMappingOUT0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="getOrderByIdMappingOUT1">
+                            <source type="LITERAL">application/xml</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                    </mappings>
+                    <parameters>
+                        <parameter name="orderId" isRequired="true" style="URI_CONTEXT" dataType="String"/>
+                    </parameters>
+                    <responses>
+                        <response name="get200getOrderByIdResponse" code="200" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:Order" excludeRoot="true" dimension="0"/>
+                        <response name="get400getOrderByIdResponse" code="400" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                        <response name="get404getOrderByIdResponse" code="404" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                    </responses>
+                </resource>
+                <resource method="PUT" path="/pet" type="SIMPLE" name="updatePet" displayName="Update an existing pet">
+                    <mappings>
+                        <map context="IN" name="updatePetMappingIN0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="IN" name="updatePetMappingIN1">
+                            <source type="LITERAL">application/xml</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="updatePetMappingOUT0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="updatePetMappingOUT1">
+                            <source type="LITERAL">application/xml</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                    </mappings>
+                    <parameters/>
+                    <request name="body" messageFormatterType="application/json" builderType="application/octet+idataoref" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:Pet" dimension="0"/>
+                    <responses>
+                        <response name="put400updatePetResponse" code="400" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                        <response name="put404updatePetResponse" code="404" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                        <response name="put405updatePetResponse" code="405" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                    </responses>
+                </resource>
+                <resource method="PUT" path="/user/{username}" type="SIMPLE" name="updateUser" displayName="Updated user">
+                    <description>This can only be done by the logged in user.</description>
+                    <mappings>
+                        <map context="IN" name="updateUserMappingIN0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="updateUserMappingOUT0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="updateUserMappingOUT1">
+                            <source type="LITERAL">application/xml</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                    </mappings>
+                    <parameters>
+                        <parameter name="username" isRequired="true" style="URI_CONTEXT" dataType="String"/>
+                    </parameters>
+                    <request name="body" messageFormatterType="application/json" builderType="application/octet+idataoref" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:User" dimension="0"/>
+                    <responses>
+                        <response name="put400updateUserResponse" code="400" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                        <response name="put404updateUserResponse" code="404" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                    </responses>
+                </resource>
+                <resource method="DELETE" path="/pet/{petId}" type="SIMPLE" name="deletePet" displayName="Deletes a pet">
+                    <mappings>
+                        <map context="IN" name="apikeyHeader">
+                            <source type="LITERAL"/>
+                            <target type="HEADER">api_key</target>
+                        </map>
+                        <map context="OUT" name="deletePetMappingOUT0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="deletePetMappingOUT1">
+                            <source type="LITERAL">application/xml</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                    </mappings>
+                    <parameters>
+                        <parameter name="petId" isRequired="true" style="URI_CONTEXT" dataType="String"/>
+                    </parameters>
+                    <request name="stream" messageFormatterType="vnd.sag.cloudstreams+binary" builderType="vnd.sag.cloudstreams+binary" dimension="0"/>
+                    <responses>
+                        <response name="delete400deletePetResponse" code="400" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                        <response name="delete404deletePetResponse" code="404" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                    </responses>
+                </resource>
+                <resource method="POST" path="/pet" type="SIMPLE" name="addPet" displayName="Add a new pet to the store">
+                    <mappings>
+                        <map context="IN" name="addPetMappingIN0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="IN" name="addPetMappingIN1">
+                            <source type="LITERAL">application/xml</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="addPetMappingOUT0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="addPetMappingOUT1">
+                            <source type="LITERAL">application/xml</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                    </mappings>
+                    <parameters/>
+                    <request name="body" messageFormatterType="application/json" builderType="application/octet+idataoref" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:Pet" dimension="0"/>
+                    <responses>
+                        <response name="post405addPetResponse" code="405" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                    </responses>
+                </resource>
+                <resource method="POST" path="/user/createWithList" type="SIMPLE" name="createUsersWithListInput" displayName="Creates list of users with given input array">
+                    <mappings>
+                        <map context="IN" name="createUsersWithListInputMappingIN0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="createUsersWithListInputMappingOUT0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="createUsersWithListInputMappingOUT1">
+                            <source type="LITERAL">application/xml</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                    </mappings>
+                    <parameters/>
+                    <request name="body" messageFormatterType="application/json" builderType="application/octet+idataoref" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:User" dimension="1"/>
+                    <responses>
+                        <response name="postdefaultcreateUsersWithListInputResponse" code="100-599" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                    </responses>
+                </resource>
+                <resource method="GET" path="/user/login" type="SIMPLE" name="loginUser" displayName="Logs user into the system">
+                    <mappings>
+                        <map context="OUT" name="loginUserMappingOUT0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="loginUserMappingOUT1">
+                            <source type="LITERAL">application/xml</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="XExpiresAfterHeader">
+                            <source type="LITERAL"/>
+                            <target type="HEADER">X-Expires-After</target>
+                        </map>
+                        <map context="OUT" name="XRateLimitHeader">
+                            <source type="LITERAL"/>
+                            <target type="HEADER">X-Rate-Limit</target>
+                        </map>
+                    </mappings>
+                    <parameters>
+                        <parameter name="username" isRequired="true" style="QUERYSTRING_PARAM" dataType="String"/>
+                        <parameter name="password" isRequired="true" style="QUERYSTRING_PARAM" dataType="String"/>
+                    </parameters>
+                    <responses>
+                        <response name="get200loginUserResponse" code="200" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:get200loginUserResponseDoc" excludeRoot="true" dimension="0"/>
+                        <response name="get400loginUserResponse" code="400" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                    </responses>
+                </resource>
+                <resource method="GET" path="/user/logout" type="SIMPLE" name="logoutUser" displayName="Logs out current logged in user session">
+                    <mappings>
+                        <map context="OUT" name="logoutUserMappingOUT0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="logoutUserMappingOUT1">
+                            <source type="LITERAL">application/xml</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                    </mappings>
+                    <parameters/>
+                    <responses>
+                        <response name="getdefaultlogoutUserResponse" code="100-599" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                    </responses>
+                </resource>
+                <resource method="GET" path="/pet/{petId}" type="SIMPLE" name="getPetById" displayName="Find pet by ID">
+                    <description>Returns a single pet</description>
+                    <mappings>
+                        <map context="OUT" name="getPetByIdMappingOUT0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="getPetByIdMappingOUT1">
+                            <source type="LITERAL">application/xml</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                    </mappings>
+                    <parameters>
+                        <parameter name="petId" isRequired="true" style="URI_CONTEXT" dataType="String"/>
+                    </parameters>
+                    <responses>
+                        <response name="get200getPetByIdResponse" code="200" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:Pet" excludeRoot="true" dimension="0"/>
+                        <response name="get400getPetByIdResponse" code="400" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                        <response name="get404getPetByIdResponse" code="404" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                    </responses>
+                </resource>
+                <resource method="DELETE" path="/user/{username}" type="SIMPLE" name="deleteUser" displayName="Delete user">
+                    <description>This can only be done by the logged in user.</description>
+                    <mappings>
+                        <map context="OUT" name="deleteUserMappingOUT0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="deleteUserMappingOUT1">
+                            <source type="LITERAL">application/xml</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                    </mappings>
+                    <parameters>
+                        <parameter name="username" isRequired="true" style="URI_CONTEXT" dataType="String"/>
+                    </parameters>
+                    <request name="stream" messageFormatterType="vnd.sag.cloudstreams+binary" builderType="vnd.sag.cloudstreams+binary" dimension="0"/>
+                    <responses>
+                        <response name="delete400deleteUserResponse" code="400" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                        <response name="delete404deleteUserResponse" code="404" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                    </responses>
+                </resource>
+                <resource method="GET" path="/user/{username}" type="SIMPLE" name="getUserByName" displayName="Get user by user name">
+                    <mappings>
+                        <map context="OUT" name="getUserByNameMappingOUT0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="getUserByNameMappingOUT1">
+                            <source type="LITERAL">application/xml</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                    </mappings>
+                    <parameters>
+                        <parameter name="username" isRequired="true" style="URI_CONTEXT" dataType="String"/>
+                    </parameters>
+                    <responses>
+                        <response name="get200getUserByNameResponse" code="200" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:User" excludeRoot="true" dimension="0"/>
+                        <response name="get400getUserByNameResponse" code="400" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                        <response name="get404getUserByNameResponse" code="404" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                    </responses>
+                </resource>
+                <resource method="POST" path="/user" type="SIMPLE" name="createUser" displayName="Create user">
+                    <description>This can only be done by the logged in user.</description>
+                    <mappings>
+                        <map context="IN" name="createUserMappingIN0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="createUserMappingOUT0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="createUserMappingOUT1">
+                            <source type="LITERAL">application/xml</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                    </mappings>
+                    <parameters/>
+                    <request name="body" messageFormatterType="application/json" builderType="application/octet+idataoref" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:User" dimension="0"/>
+                    <responses>
+                        <response name="postdefaultcreateUserResponse" code="100-599" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                    </responses>
+                </resource>
+                <resource method="GET" path="/pet/findByStatus" type="SIMPLE" name="findPetsByStatus" displayName="Finds Pets by status">
+                    <description>Multiple status values can be provided with comma separated strings</description>
+                    <mappings>
+                        <map context="OUT" name="findPetsByStatusMappingOUT0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="findPetsByStatusMappingOUT1">
+                            <source type="LITERAL">application/xml</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                    </mappings>
+                    <parameters>
+                        <parameter name="status" isRequired="true" style="QUERYSTRING_PARAM" dataType="String"/>
+                    </parameters>
+                    <responses>
+                        <response name="get200findPetsByStatusResponse" code="200" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:Pet" excludeRoot="true" dimension="1"/>
+                        <response name="get400findPetsByStatusResponse" code="400" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                    </responses>
+                </resource>
+                <resource method="GET" path="/store/inventory" type="SIMPLE" name="getInventory" displayName="Returns pet inventories by status">
+                    <description>Returns a map of status codes to quantities</description>
+                    <mappings>
+                        <map context="OUT" name="getInventoryMappingOUT0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                    </mappings>
+                    <parameters/>
+                    <responses>
+                        <response name="get200getInventoryResponse" code="200" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:get200getInventoryResponseDoc" excludeRoot="true" dimension="0"/>
+                    </responses>
+                </resource>
+                <resource method="DELETE" path="/store/order/{orderId}" type="SIMPLE" name="deleteOrder" displayName="Delete purchase order by ID">
+                    <description>For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors</description>
+                    <mappings>
+                        <map context="OUT" name="deleteOrderMappingOUT0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="deleteOrderMappingOUT1">
+                            <source type="LITERAL">application/xml</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                    </mappings>
+                    <parameters>
+                        <parameter name="orderId" isRequired="true" style="URI_CONTEXT" dataType="String"/>
+                    </parameters>
+                    <request name="stream" messageFormatterType="vnd.sag.cloudstreams+binary" builderType="vnd.sag.cloudstreams+binary" dimension="0"/>
+                    <responses>
+                        <response name="delete400deleteOrderResponse" code="400" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                        <response name="delete404deleteOrderResponse" code="404" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                    </responses>
+                </resource>
+                <resource method="POST" path="/pet/{petId}" type="SIMPLE" name="updatePetWithForm" displayName="Updates a pet in the store with form data">
+                    <mappings>
+                        <map context="IN" name="updatePetWithFormMappingIN0">
+                            <source type="LITERAL">application/x-www-form-urlencoded</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="updatePetWithFormMappingOUT0">
+                            <source type="LITERAL">application/json</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                        <map context="OUT" name="updatePetWithFormMappingOUT1">
+                            <source type="LITERAL">application/xml</source>
+                            <target type="HEADER">Content-Type</target>
+                        </map>
+                    </mappings>
+                    <parameters>
+                        <parameter name="petId" isRequired="true" style="URI_CONTEXT" dataType="String"/>
+                    </parameters>
+                    <request name="stream" messageFormatterType="vnd.sag.cloudstreams+binary" builderType="vnd.sag.cloudstreams+binary" dimension="0"/>
+                    <responses>
+                        <response name="post405updatePetWithFormResponse" code="405" messageFormatterType="application/octet+idataoref" builderType="application/json" documentRef="com.softwareag.cloudstreams.petstore_v2.petstoreservice.doctypes:csEmptyDoc" excludeRoot="true" dimension="0"/>
+                    </responses>
+                </resource>
+            </resources>
+        </service>
+    </services>
+</rest-connector>

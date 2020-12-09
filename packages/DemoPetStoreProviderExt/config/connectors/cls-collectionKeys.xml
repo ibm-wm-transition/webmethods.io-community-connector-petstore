@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<services>
+    <cloudstreamsCollectionKeys serviceName="WmCloudStreams.RestVS">
+        <servicesKeys>
+            <keyDetails collectionKey="fld_common.DemoPetStoreProvider.com_softwareag_cloudstreams_petstore_v2.operations.triggers:findPetsByStatus" connectorServiceName="fld_common.DemoPetStoreProvider.com_softwareag_cloudstreams_petstore_v2.operations.triggers:findPetsByStatus"/>
+            <keyDetails collectionKey="fld_common.DemoPetStoreProvider.com_softwareag_cloudstreams_petstore_v2.operations.triggers:getPetInventoryByStatus" connectorServiceName="fld_common.DemoPetStoreProvider.com_softwareag_cloudstreams_petstore_v2.operations.triggers:getPetInventoryByStatus"/>
+        </servicesKeys>
+    </cloudstreamsCollectionKeys>
+</services>

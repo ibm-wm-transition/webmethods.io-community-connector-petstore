@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="name">DemoPetStoreProvider</value>
+  <value name="version">10.5.0</value>
+  <value name="build"></value>
+  <value name="patch_nums"></value>
+  <value name="description"></value>
+  <value name="target_pkg_version">10.5.0</value>
+  <value name="jvm_version">1.8.0_222</value>
+  <value name="source_server_version">10.5.0.0</value>
+  <value name="target_server_version">10.5.0.0</value>
+  <value name="time">2020-12-01 07:21:48 IST</value>
+  <value name="type">full</value>
+  <null name="retainPatchHistory"/>
+  <value name="target_pkg_name">DemoPetStoreProvider</value>
+  <value name="publisher">10.248.110.154</value>
+  <array name="files_to_delete" type="value" depth="1">
+  </array>
+</Values>

@@ -1,8 +1,8 @@
 /* Need to register my string converters at the very beginning */
-rootProject.name = 'connector-template'
+rootProject.name = 'demo-connector-petstore'
 
 
-include ':WmTemplateProvider',':WmTemplateProviderExt'
+include ':DemoPetStoreProvider',':DemoPetStoreProviderExt'
 
-project(":WmTemplateProvider").projectDir = new File(rootDir, 'packages/WmTemplateProvider')
-project(":WmTemplateProviderExt").projectDir = new File(rootDir, 'packages/WmTemplateProviderExt')
+project(":DemoPetStoreProvider").projectDir = new File(rootDir, 'packages/DemoPetStoreProvider')
+project(":DemoPetStoreProviderExt").projectDir = new File(rootDir, 'packages/DemoPetStoreProviderExt')
