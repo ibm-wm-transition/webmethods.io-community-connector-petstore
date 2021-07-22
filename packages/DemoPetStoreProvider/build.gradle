@@ -9,7 +9,7 @@ bas = [
 version : 'v1.0.1-005',
 ] }
 dependencies { classpath(
-"com.softwareag.connector:plugin:v1.0.1-005")
+"com.softwareag.connector:plugin:v2.0.2")
 repositories {
     println 'Plugin repo Code'
 
