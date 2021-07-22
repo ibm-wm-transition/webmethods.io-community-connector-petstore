@@ -89,6 +89,6 @@
             gradle :WmTemplateProvider:assembleArtifact          
   14. You will find zip in "build/tmpzip" folder.
   15. Once changes are merged to master GitHub Actions workflow will be invoked and packages will be published to "System-Build-Snapshot".
-  16. Always use feature brach for development. Merge your changes from feature to develop branch. After testing raise pull request to master. A reviewer needs to review and merge the changes.
+  16. Always use feature brach for development. Merge your changes from feature to develop branch. After testing raise pull request to master. A reviewer needs to review and merge the changes. 
   
   
