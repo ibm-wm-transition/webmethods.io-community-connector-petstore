@@ -4,7 +4,7 @@
 
   The repository consists of the following folders and files:
 
-#### .github/workflows
+#### .github/workflows:
 The **.github** folder contains workflows. These workflows should be configured to run on pull request to the configured branch. All yml files under this folder will be executed based on condition.
 
 **Example:**
@@ -14,7 +14,7 @@ The **.github** folder contains workflows. These workflows should be configured 
                     branches: [ master ]     
 
 
-- **gradle.yml**: This yml file consists of build jobs to run the gradle build commands for building the Connector using Gradle upon pushing the changes to the configured branch.
+- **gradle.yml:**: This yml file consists of build jobs to run the gradle build commands for building the Connector using Gradle upon pushing the changes to the configured branch.
 
 **Example:**
 
@@ -22,13 +22,13 @@ The **.github** folder contains workflows. These workflows should be configured 
                 ./gradlew :WmTemplateProvider:assembleArtifact
 
 
-#### packages
+#### packages:
 The packages folder consists of the templates for the Connector packages. The templates need to be replaced with the contents of the Connector packages. Under the template package folder, the below two files required for the building the Connector package using Gradle.
 
 - **build.gradle:** This file consists of the tasks defined and the dependencies mentioned which are required to build the Connector package.
 
 
-#### gradle.properties
+#### gradle.properties:
 This file consists of all the properties used for building the Connector, build dependencies and build package repositories.
 
 After the Connector repository is created from the template repository, below properties should be updated accordingly.
@@ -44,13 +44,13 @@ After the Connector repository is created from the template repository, below pr
             build.snapshot.reponame=connector-repository
 
 
-#### generateArtifacts.bat
+#### generateArtifacts.bat:
 This is the automation script that can generate the artifacts based on the values provided in the gradle.properties file.
 
-#### build.gradle
+#### build.gradle:
 This file present in the root folder of the template repository consists of the tasks defined to publish the Connector package to the repository specified using the Package Manager.
 
-#### settings.gradle
+#### settings.gradle:
 In this settings.gradle, the Connector packages are defined for the respective Connector repository.
 
 
