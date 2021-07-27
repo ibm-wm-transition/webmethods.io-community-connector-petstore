@@ -8,16 +8,18 @@
 The **.github** folder contains workflows. These workflows should be configured to run on pull request to the configured branch. All yml files under this folder will be executed based on condition.
 
 **Example:**
-            on:
-              pull_request:
-                branches: [ master ]     
+
+                on:
+                  pull_request:
+                    branches: [ master ]     
 
 
 - **gradle.yml**: This yml file consists of build jobs to run the gradle build commands for building the Connector using Gradle upon pushing the changes to the configured branch.
 
 **Example:**
-          run: |
-            ./gradlew :WmTemplateProvider:assembleArtifact
+
+              run: |
+                ./gradlew :WmTemplateProvider:assembleArtifact
 
 
 #### packages
